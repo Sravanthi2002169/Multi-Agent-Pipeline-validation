@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "pipeline_run_id": "string (UUID, required)",
+  "release": "string (required, e.g., '25.2.01')",
+  "stage": "discovery (enum, required)",
+  "stage_status": "SUCCESS | FAILURE (enum, required)",
+  "timestamp": "string (ISO 8601, required)",
+  "summary": {
+    "total_changes": "integer (>= 0, required)",
+    "total_files_scanned": "integer (>= 0, required)",
+    "total_files_impacted": "integer (>= 0, required)"
+  },
+  "impacted_files": [
+    {
+      "file_path": "string (required, must exist in blob)",
+      "change_ids": ["string (required, non-empty array)"],
+      "matched_patterns": ["string (required)"],
+      "line_numbers": ["integer (required)"]
+    }
+  ],
+  "errors": ["string (optional, present if stage_status = FAILURE)"]
+}
