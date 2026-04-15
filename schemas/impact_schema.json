@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "pipeline_run_id": "string (must match discovery run)",
+  "stage": "impact_analysis",
+  "stage_status": "SUCCESS | PARTIAL | FAILURE",
+  "impact_results": [
+    {
+      "file_path": "string (required, from discovery)",
+      "change_id": "string (required)",
+      "severity": "HIGH | MEDIUM | LOW (enum, required)",
+      "reason": "string (required, non-empty, min 20 chars)",
+      "affected_code_block": "string (required for HIGH)",
+      "recommended_action": "REMEDIATE | REVIEW | NO_ACTION"
+    }
+  ],
+  "files_analyzed": "integer (must match discovery count)",
+  "files_with_impact": "integer (>= 0)"
+}
