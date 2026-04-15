@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "pipeline_run_id": "string (must match previous stages)",
+  "stage": "remediation",
+  "stage_status": "SUCCESS | PARTIAL | FAILURE",
+  "remediated_files": [
+    {
+      "original_path": "string (must match impact file_path)",
+      "remediated_path": "string (required, blob path)",
+      "rollback_path": "string (required, blob path)",
+      "changes_applied": ["string (non-empty array)"],
+      "change_id": "string (required)"
+    }
+  ],
+  "files_remediated": "integer (>= 0)",
+  "files_skipped": "integer (>= 0)",
+  "skip_reasons": [{"file_path": "string", "reason": "string"}]
+}
