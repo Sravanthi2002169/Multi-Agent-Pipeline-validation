@@ -1,4 +1,5 @@
 import json
+import os
 from jsonschema import validate, ValidationError
 from azure.storage.blob import BlobServiceClient
 
@@ -77,7 +78,7 @@ def validate_blob_json(schema_path, connection_string, container, blob_path):
 if __name__ == "__main__":
 
     # 🔴🔴🔴 REPLACE THIS 🔴🔴🔴
-    CONNECTION_STRING = "<YOUR_AZURE_STORAGE_CONNECTION_STRING>"
+    CONNECTION_STRING = os.getenv("AZURE_STORAGE_CONNECTION_STRING")
 
     # 🔴🔴🔴 VERIFY THIS 🔴🔴🔴
     CONTAINER = "tenant-qnxtupgd"

@@ -1,41 +1,49 @@
 {
   "schema_version": "1.0",
-  "release": "1.0.0",
+  "release": "sample_release_v1",
   "scan_summary": {
-    "total_sp_scanned": 5,
-    "total_changes_processed": 3,
-    "total_changes_with_impact": 2,
-    "total_changes_skipped": 1,
-    "total_unique_impacted_sps": 3
+    "total_sp_scanned": 10,
+    "total_changes_processed": 8,
+    "total_changes_with_impact": 6,
+    "total_changes_skipped": 2,
+    "total_unique_impacted_sps": 5
   },
   "discovery_results": [
     {
       "change_id": "CHG-001",
-      "database": "DatabaseA",
-      "object": "TableX",
-      "change_description": "Drop Column: TableX.column_y",
+      "database": "SampleDB",
+      "object": "Customer",
+      "change_description": "Drop Column: Customer.AgeGroup",
       "impacted_sp_files": [
-        "path/to/procedure_a.sql",
-        "path/to/procedure_b.sql"
+        "sp_customer_update.sql",
+        "sp_customer_validation.sql"
       ],
-      "match_reason_summary": "Stored procedures reference column_y"
+      "match_reason_summary": "Column reference found in WHERE and SELECT clauses"
     },
     {
       "change_id": "CHG-002",
-      "database": "DatabaseA",
-      "object": "ServerConfig",
-      "change_description": "Server name update",
+      "database": "SampleDB",
+      "object": "Order",
+      "change_description": "Alter Column: Order.Status length change",
       "impacted_sp_files": [
-        "path/to/procedure_a.sql"
+        "sp_order_process.sql"
       ],
-      "match_reason_summary": "Hardcoded server reference found"
+      "match_reason_summary": "String length assumption found in validation logic"
+    },
+    {
+      "change_id": "CHG-003",
+      "database": "SampleDB",
+      "object": "Payment",
+      "change_description": "Drop Table: PaymentHistory",
+      "impacted_sp_files": [],
+      "match_reason_summary": "No direct references found"
     }
   ],
   "skipped_changes": [
     {
-      "change_id": "CHG-003",
-      "change_description": "Create Table: NewTable",
-      "skip_reason": "No dependency found in existing procedures"
+      "change_id": "CHG-004",
+      "change_description": "New Table Added: AuditLog",
+      "skip_reason": "No existing dependency in stored procedures"
     }
   ]
 }

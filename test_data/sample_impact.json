@@ -1,61 +1,76 @@
 {
   "schema_version": "1.0",
   "sp_analysis_summary": {
-    "total_files_analyzed": 2,
-    "total_files_success": 2,
-    "total_files_failed": 0,
-    "total_changes_analyzed": 2,
-    "total_impacts_found": 2,
-    "critical_count": 1,
+    "total_files_analyzed": 4,
+    "total_files_success": 3,
+    "total_files_failed": 1,
+    "total_changes_analyzed": 6,
+    "total_impacts_found": 5,
+    "critical_count": 2,
     "high_count": 1,
-    "medium_count": 0,
+    "medium_count": 1,
     "low_count": 0,
-    "review_count": 0
+    "review_count": 1
   },
   "sp_impact_report": [
     {
-      "file_path": "path/to/procedure_a.sql",
+      "file_path": "sp_customer_update.sql",
       "file_type": ".sql",
       "read_status": "SUCCESS",
-      "total_lines": 40,
+      "total_lines": 120,
       "related_changes": [
         {
-          "db_object": "DatabaseA.TableX",
+          "db_object": "Customer.AgeGroup",
           "change_id": "CHG-001",
           "change_type": "DROP_COLUMN",
           "impact_level": "CRITICAL",
-          "affected_lines": [15],
-          "affected_code": "column_y = value",
-          "impact_reason": "Dropped column is referenced",
-          "remediation_hint": "Remove or replace column usage"
-        },
-        {
-          "db_object": "ServerConfig",
-          "change_id": "CHG-002",
-          "change_type": "SERVER_CHANGE",
-          "impact_level": "HIGH",
-          "affected_lines": [10],
-          "affected_code": "FROM server_old.database.schema.table",
-          "impact_reason": "Outdated server reference",
-          "remediation_hint": "Update server reference"
+          "affected_lines": [45, 78],
+          "affected_code": "WHERE AgeGroup = 'SENIOR'",
+          "impact_reason": "Dropped column used in filtering",
+          "remediation_hint": "Replace logic with derived age calculation"
         }
       ]
     },
     {
-      "file_path": "path/to/procedure_b.sql",
+      "file_path": "sp_order_process.sql",
       "file_type": ".sql",
       "read_status": "SUCCESS",
-      "total_lines": 25,
+      "total_lines": 80,
       "related_changes": [
         {
-          "db_object": "DatabaseA.TableX",
-          "change_id": "CHG-001",
-          "change_type": "DROP_COLUMN",
+          "db_object": "Order.Status",
+          "change_id": "CHG-002",
+          "change_type": "ALTER_COLUMN",
           "impact_level": "HIGH",
-          "affected_lines": [8],
-          "affected_code": "SELECT column_y FROM TableX",
-          "impact_reason": "Column no longer exists",
-          "remediation_hint": "Modify SELECT statement"
+          "affected_lines": [30],
+          "affected_code": "IF Status = 'APPROVED'",
+          "impact_reason": "Status length assumption broken",
+          "remediation_hint": "Update validation rules"
+        }
+      ]
+    },
+    {
+      "file_path": "sp_billing_process.sql",
+      "file_type": ".sql",
+      "read_status": "FAILED",
+      "error": "File locked or unreadable",
+      "related_changes": []
+    },
+    {
+      "file_path": "sp_payment_archive.sql",
+      "file_type": ".sql",
+      "read_status": "SUCCESS",
+      "total_lines": 60,
+      "related_changes": [
+        {
+          "db_object": "PaymentHistory",
+          "change_id": "CHG-003",
+          "change_type": "DROP_TABLE",
+          "impact_level": "REVIEW",
+          "affected_lines": [],
+          "affected_code": "",
+          "impact_reason": "No direct match but dependency uncertain",
+          "remediation_hint": "Manual review required"
         }
       ]
     }

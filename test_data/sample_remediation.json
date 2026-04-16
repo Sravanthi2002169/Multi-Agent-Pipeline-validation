@@ -1,39 +1,55 @@
 {
   "schema_version": "1.0",
   "remediation_summary": {
-    "total_files_processed": 2,
+    "total_files_processed": 4,
     "total_files_remediated": 2,
-    "total_files_skipped": 0
+    "total_files_partially_remediated": 1,
+    "total_files_skipped": 1
   },
   "remediation_results": [
     {
-      "file_path": "path/to/procedure_a.sql",
+      "file_path": "sp_customer_update.sql",
       "status": "REMEDIATED",
       "actions_taken": [
         {
           "change_id": "CHG-001",
-          "action": "Removed usage of deprecated column column_y",
-          "affected_lines": [15]
-        },
-        {
-          "change_id": "CHG-002",
-          "action": "Updated server reference from server_old to server_new",
-          "affected_lines": [10]
+          "action": "Replaced AgeGroup filter with derived age logic",
+          "confidence": "HIGH",
+          "affected_lines": [45, 78]
         }
       ],
-      "output_file_path": "remediated/procedure_a.sql"
+      "output_file_path": "remediated/sp_customer_update.sql"
     },
     {
-      "file_path": "path/to/procedure_b.sql",
-      "status": "REMEDIATED",
+      "file_path": "sp_order_process.sql",
+      "status": "PARTIALLY_REMEDIATED",
       "actions_taken": [
         {
-          "change_id": "CHG-001",
-          "action": "Updated SELECT query to remove column_y",
-          "affected_lines": [8]
+          "change_id": "CHG-002",
+          "action": "Updated status comparison logic",
+          "confidence": "MEDIUM",
+          "affected_lines": [30]
         }
       ],
-      "output_file_path": "remediated/procedure_b.sql"
+      "pending_actions": [
+        {
+          "change_id": "CHG-002",
+          "reason": "Business rule validation required"
+        }
+      ],
+      "output_file_path": "remediated/sp_order_process.sql"
+    },
+    {
+      "file_path": "sp_payment_archive.sql",
+      "status": "SKIPPED",
+      "skip_reason": "Impact classified as REVIEW only",
+      "actions_taken": []
+    },
+    {
+      "file_path": "sp_billing_process.sql",
+      "status": "FAILED",
+      "failure_reason": "Source file not readable in impact stage",
+      "actions_taken": []
     }
   ]
 }
