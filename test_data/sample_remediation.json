@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "remediation_summary": {
+    "total_files_processed": 2,
+    "total_files_remediated": 2,
+    "total_files_skipped": 0
+  },
+  "remediation_results": [
+    {
+      "file_path": "path/to/procedure_a.sql",
+      "status": "REMEDIATED",
+      "actions_taken": [
+        {
+          "change_id": "CHG-001",
+          "action": "Removed usage of deprecated column column_y",
+          "affected_lines": [15]
+        },
+        {
+          "change_id": "CHG-002",
+          "action": "Updated server reference from server_old to server_new",
+          "affected_lines": [10]
+        }
+      ],
+      "output_file_path": "remediated/procedure_a.sql"
+    },
+    {
+      "file_path": "path/to/procedure_b.sql",
+      "status": "REMEDIATED",
+      "actions_taken": [
+        {
+          "change_id": "CHG-001",
+          "action": "Updated SELECT query to remove column_y",
+          "affected_lines": [8]
+        }
+      ],
+      "output_file_path": "remediated/procedure_b.sql"
+    }
+  ]
+}
