@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "id": "BR-001",
+      "description": "Impact output must be derived from discovery output only"
+    },
+    {
+      "id": "BR-002",
+      "description": "Remediation output must map directly to impacted files from impact stage"
+    },
+    {
+      "id": "BR-003",
+      "description": "No agent output should be empty; all stages must return valid data"
+    }
+  ]
+}
