@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "sp_analysis_summary": {
+    "total_files_analyzed": 2,
+    "total_files_success": 2,
+    "total_files_failed": 0,
+    "total_changes_analyzed": 2,
+    "total_impacts_found": 2,
+    "critical_count": 1,
+    "high_count": 1,
+    "medium_count": 0,
+    "low_count": 0,
+    "review_count": 0
+  },
+  "sp_impact_report": [
+    {
+      "file_path": "path/to/procedure_a.sql",
+      "file_type": ".sql",
+      "read_status": "SUCCESS",
+      "total_lines": 40,
+      "related_changes": [
+        {
+          "db_object": "DatabaseA.TableX",
+          "change_id": "CHG-001",
+          "change_type": "DROP_COLUMN",
+          "impact_level": "CRITICAL",
+          "affected_lines": [15],
+          "affected_code": "column_y = value",
+          "impact_reason": "Dropped column is referenced",
+          "remediation_hint": "Remove or replace column usage"
+        },
+        {
+          "db_object": "ServerConfig",
+          "change_id": "CHG-002",
+          "change_type": "SERVER_CHANGE",
+          "impact_level": "HIGH",
+          "affected_lines": [10],
+          "affected_code": "FROM server_old.database.schema.table",
+          "impact_reason": "Outdated server reference",
+          "remediation_hint": "Update server reference"
+        }
+      ]
+    },
+    {
+      "file_path": "path/to/procedure_b.sql",
+      "file_type": ".sql",
+      "read_status": "SUCCESS",
+      "total_lines": 25,
+      "related_changes": [
+        {
+          "db_object": "DatabaseA.TableX",
+          "change_id": "CHG-001",
+          "change_type": "DROP_COLUMN",
+          "impact_level": "HIGH",
+          "affected_lines": [8],
+          "affected_code": "SELECT column_y FROM TableX",
+          "impact_reason": "Column no longer exists",
+          "remediation_hint": "Modify SELECT statement"
+        }
+      ]
+    }
+  ]
+}
