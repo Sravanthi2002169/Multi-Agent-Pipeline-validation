@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "release": "1.0.0",
+  "scan_summary": {
+    "total_sp_scanned": 5,
+    "total_changes_processed": 3,
+    "total_changes_with_impact": 2,
+    "total_changes_skipped": 1,
+    "total_unique_impacted_sps": 3
+  },
+  "discovery_results": [
+    {
+      "change_id": "CHG-001",
+      "database": "DatabaseA",
+      "object": "TableX",
+      "change_description": "Drop Column: TableX.column_y",
+      "impacted_sp_files": [
+        "path/to/procedure_a.sql",
+        "path/to/procedure_b.sql"
+      ],
+      "match_reason_summary": "Stored procedures reference column_y"
+    },
+    {
+      "change_id": "CHG-002",
+      "database": "DatabaseA",
+      "object": "ServerConfig",
+      "change_description": "Server name update",
+      "impacted_sp_files": [
+        "path/to/procedure_a.sql"
+      ],
+      "match_reason_summary": "Hardcoded server reference found"
+    }
+  ],
+  "skipped_changes": [
+    {
+      "change_id": "CHG-003",
+      "change_description": "Create Table: NewTable",
+      "skip_reason": "No dependency found in existing procedures"
+    }
+  ]
+}
