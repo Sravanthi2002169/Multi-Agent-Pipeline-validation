@@ -1,5 +1,15 @@
 {
   "schema_version": "1.0",
+  "pipeline_run_id": "run_2024_06_01_10_00_00",
+  "stage": "discovery",
+  "stage_status": "completed",
+  "timestamp": "2024-06-01T10:00:00Z",
+  "summary": {
+    "total_changes": 4,
+    "total_files_scanned": 20,
+    "total_files_impacted": 3
+  },
+  "impacted_files": [],
   "release": "sample_release_v1",
   "scan_summary": {
     "total_sp_scanned": 10,

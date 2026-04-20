@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "id": "BR-DISC-001",
+      "stage": "discovery",
+      "description": "total_files_impacted must be <= total_files_scanned",
+      "field": "summary",
+      "type": "comparison",
+      "condition": "lte",
+      "left": "total_files_impacted",
+      "right": "total_files_scanned"
+    },
+    {
+      "id": "BR-DISC-002",
+      "stage": "discovery",
+      "description": "If stage_status is SUCCESS, errors must be empty",
+      "type": "conditional",
+      "if": {
+        "field": "stage_status",
+        "equals": "SUCCESS"
+      },
+      "then": {
+        "field": "errors",
+        "must_be_empty": true
+      }
+    },
+    {
+      "id": "BR-IMP-001",
+      "stage": "impact",
+      "description": "HIGH severity must have affected_code_block",
+      "type": "array_check",
+      "array": "impact_results",
+      "condition": {
+        "field": "severity",
+        "equals": "HIGH"
+      },
+      "must_have": "affected_code_block"
+    },
+    {
+      "id": "BR-IMP-002",
+      "stage": "impact",
+      "description": "reason must be at least 20 characters",
+      "type": "array_length",
+      "array": "impact_results",
+      "field": "reason",
+      "min_length": 20
+    },
+    {
+      "id": "BR-REM-001",
+      "stage": "remediation",
+      "description": "SQL file should not be empty",
+      "type": "string_check",
+      "min_length": 10
+    }
+  ]
+}

@@ -1,18 +1,104 @@
 {
-  "schema_version": "1.0",
-  "pipeline_run_id": "string (must match discovery run)",
-  "stage": "impact_analysis",
-  "stage_status": "SUCCESS | PARTIAL | FAILURE",
-  "impact_results": [
-    {
-      "file_path": "string (required, from discovery)",
-      "change_id": "string (required)",
-      "severity": "HIGH | MEDIUM | LOW (enum, required)",
-      "reason": "string (required, non-empty, min 20 chars)",
-      "affected_code_block": "string (required for HIGH)",
-      "recommended_action": "REMEDIATE | REVIEW | NO_ACTION"
-    }
+  "type": "object",
+  "required": [
+    "schema_version",
+    "pipeline_run_id",
+    "stage",
+    "stage_status",
+    "impact_results",
+    "files_analyzed",
+    "files_with_impact"
   ],
-  "files_analyzed": "integer (must match discovery count)",
-  "files_with_impact": "integer (>= 0)"
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "enum": [
+        "1.0"
+      ]
+    },
+    "pipeline_run_id": {
+      "type": "string"
+    },
+    "stage": {
+      "type": "string",
+      "enum": [
+        "impact_analysis"
+      ]
+    },
+    "stage_status": {
+      "type": "string",
+      "enum": [
+        "SUCCESS",
+        "PARTIAL",
+        "FAILURE"
+      ]
+    },
+    "impact_results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "file_path",
+          "change_id",
+          "severity",
+          "reason",
+          "recommended_action"
+        ],
+        "properties": {
+          "file_path": {
+            "type": "string"
+          },
+          "change_id": {
+            "type": "string"
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "HIGH",
+              "MEDIUM",
+              "LOW"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 20
+          },
+          "affected_code_block": {
+            "type": "string"
+          },
+          "recommended_action": {
+            "type": "string",
+            "enum": [
+              "REMEDIATE",
+              "REVIEW",
+              "NO_ACTION"
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "severity": {
+                  "const": "HIGH"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "affected_code_block"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "files_analyzed": {
+      "type": "integer"
+    },
+    "files_with_impact": {
+      "type": "integer",
+      "minimum": 0
+    }
+  }
 }

@@ -1,22 +1,101 @@
 {
-  "schema_version": "1.0",
-  "pipeline_run_id": "string (UUID, required)",
-  "release": "string (required, e.g., '25.2.01')",
-  "stage": "discovery (enum, required)",
-  "stage_status": "SUCCESS | FAILURE (enum, required)",
-  "timestamp": "string (ISO 8601, required)",
-  "summary": {
-    "total_changes": "integer (>= 0, required)",
-    "total_files_scanned": "integer (>= 0, required)",
-    "total_files_impacted": "integer (>= 0, required)"
-  },
-  "impacted_files": [
-    {
-      "file_path": "string (required, must exist in blob)",
-      "change_ids": ["string (required, non-empty array)"],
-      "matched_patterns": ["string (required)"],
-      "line_numbers": ["integer (required)"]
-    }
+  "type": "object",
+  "required": [
+    "schema_version",
+    "pipeline_run_id",
+    "release",
+    "stage",
+    "stage_status",
+    "timestamp",
+    "summary",
+    "impacted_files"
   ],
-  "errors": ["string (optional, present if stage_status = FAILURE)"]
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "enum": ["1.0"]
+    },
+    "pipeline_run_id": {
+      "type": "string"
+    },
+    "release": {
+      "type": "string"
+    },
+    "stage": {
+      "type": "string",
+      "enum": ["discovery"]
+    },
+    "stage_status": {
+      "type": "string",
+      "enum": ["SUCCESS", "FAILURE"]
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "summary": {
+      "type": "object",
+      "required": [
+        "total_changes",
+        "total_files_scanned",
+        "total_files_impacted"
+      ],
+      "properties": {
+        "total_changes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "total_files_scanned": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "total_files_impacted": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "impacted_files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "file_path",
+          "change_ids",
+          "matched_patterns",
+          "line_numbers"
+        ],
+        "properties": {
+          "file_path": {
+            "type": "string"
+          },
+          "change_ids": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            }
+          },
+          "matched_patterns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "line_numbers": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
 }

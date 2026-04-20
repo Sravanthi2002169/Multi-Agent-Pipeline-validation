@@ -1,5 +1,8 @@
 {
   "schema_version": "1.0",
+  "pipeline_run_id": "test-run-001",
+  "stage": "impact_analysis",
+  "stage_status": "SUCCESS",
   "sp_analysis_summary": {
     "total_files_analyzed": 4,
     "total_files_success": 3,
