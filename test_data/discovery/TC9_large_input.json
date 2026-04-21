@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "pipeline_run_id": "run_2024_06_01_10_00_00",
+  "stage": "discovery",
+  "stage_status": "completed",
+  "timestamp": "2024-06-01T10:00:00Z",
+  "summary": {
+    "total_changes": 4,
+    "total_files_scanned": 20,
+    "total_files_impacted": 3
+  },
+  "impacted_files": [
+    {
+      "file_path": "/src/app/file1.py",
+      "change_type": "modified",
+      "lines_changed": [10, 11, 12],
+      "change_summary": "Modified function X to handle new input format."
+    },
+    {
+      "file_path": "/src/app/file2.js",
+      "change_type": "added",
+      "lines_changed": [5, 6, 7],
+      "change_summary": "Added new component Y for user interface."
+    },
+    {
+      "file_path": "/src/app/file3.java",
+      "change_type": "deleted",
+      "lines_changed": [20, 21],
+      "change_summary": "Deleted deprecated method Z."
+    }
+  ],
+  
+  "impacted_files_duplicate_1": [
+    {
+      "file_path": "/src/app/file1.py",
+      "change_type": "modified",
+      "lines_changed": [10, 11, 12],
+      "change_summary": "Modified function X to handle new input format."
+    },
+    {
+      "file_path": "/src/app/file2.js",
+      "change_type": "added",
+      "lines_changed": [5, 6, 7],
+      "change_summary": "Added new component Y for user interface."
+    },
+    {
+      "file_path": "/src/app/file3.java",
+      "change_type": "deleted",
+      "lines_changed": [20, 21],
+      "change_summary": "Deleted deprecated method Z."
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0",
+  "pipeline_run_id": "run-005",
+  "stage": "impact_analysis",
+  "stage_status": "SUCCESS",
+  "impact_results": [
+    {
+      "file_path": "file1.sql",
+      "change_id": "c1",
+      "severity": "CRITICAL",
+      "reason": "This is a valid long reason for testing enum.",
+      "recommended_action": "REVIEW"
+    }
+  ],
+  "files_analyzed": 1,
+  "files_with_impact": 1
+}

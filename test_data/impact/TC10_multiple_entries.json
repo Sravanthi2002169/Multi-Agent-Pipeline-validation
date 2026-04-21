@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "pipeline_run_id": "run-010",
+  "stage": "impact_analysis",
+  "stage_status": "SUCCESS",
+  "impact_results": [
+    {
+      "file_path": "file1.sql",
+      "change_id": "c1",
+      "severity": "LOW",
+      "reason": "Valid long explanation one.",
+      "recommended_action": "REVIEW"
+    },
+    {
+      "file_path": "file2.sql",
+      "change_id": "c2",
+      "severity": "MEDIUM",
+      "reason": "Another valid explanation for second entry.",
+      "recommended_action": "REVIEW"
+    }
+  ],
+  "files_analyzed": 2,
+  "files_with_impact": 2
+}

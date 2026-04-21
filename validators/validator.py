@@ -3,7 +3,7 @@ import os
 import certifi
 import urllib3
 import time
-from datetime import datetime
+from datetime import datetime, timezone
 from jsonschema import validate, ValidationError
 from azure.storage.blob import BlobServiceClient
 from azure.core.pipeline.transport import RequestsTransport
@@ -123,20 +123,61 @@ def validate_business_rules(data, stage, rules):
 # -------------------------------
 # Logging
 # -------------------------------
-def log_validation(stage, blob_path, result, schema_errors, business_errors):
-    log = {
-        "log_type": "pipeline_validation",
-        "stage": stage,
-        "timestamp": datetime.now().isoformat(),
-        "output_blob_path": blob_path,
-        "validation_result": result,
-        "schema_errors": schema_errors,
-        "business_rule_errors": business_errors
-    }
+def log_validation(stage, blob_path, result, schema_errors, business_errors, data):
+    try:
+        pipeline_run_id = data.get("pipeline_run_id", "unknown")
+        schema_version = data.get("schema_version", "unknown")
 
-    print("\n📊 VALIDATION LOG:")
-    print(json.dumps(log, indent=2))
+        log = {
+            "log_type": "pipeline_validation",
+            "pipeline_run_id": pipeline_run_id,
+            "stage": stage,
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "input_blob_path": blob_path,
+            "output_blob_path": blob_path,
+            "validation_result": result,
+            "schema_errors": schema_errors,
+            "business_rule_errors": business_errors,
+            "schema_version": schema_version
+        }
 
+        print("\n📊 VALIDATION LOG:")
+        print(json.dumps(log, indent=2))
+
+        # -------------------------------
+        # Save locally
+        # -------------------------------
+        os.makedirs("logs", exist_ok=True)
+
+        file_name = f"logs/{stage}_{pipeline_run_id}.json"
+
+        with open(file_name, "w") as f:
+            json.dump(log, f, indent=2)
+
+        # -------------------------------
+        # Upload to Blob
+        # -------------------------------
+        upload_log_to_blob(log, stage, pipeline_run_id)
+
+    except Exception as e:
+        print(f"⚠️ Logging failed: {str(e)}")
+
+def upload_log_to_blob(log, stage, run_id):
+    try:
+        blob_service_client = get_blob_service(os.getenv("AZURE_STORAGE_CONNECTION_STRING"))
+
+        container_name = "pipeline-logs"
+
+        blob_name = f"{stage}/{run_id}_{datetime.utcnow().strftime('%Y%m%d%H%M%S')}.json"
+
+        blob_client = blob_service_client.get_blob_client(container_name, blob_name)
+
+        blob_client.upload_blob(json.dumps(log), overwrite=True)
+
+        print(f"☁️ Log uploaded to blob: {blob_name}")
+
+    except Exception as e:
+        print(f"⚠️ Failed to upload log: {str(e)}")
 # -------------------------------
 # CORE VALIDATION
 # -------------------------------
@@ -166,7 +207,7 @@ def validate_blob(schema_path, connection_string, container, blob_path, stage, r
 
     result = "PASS" if not (schema_errors or business_errors) else "FAIL"
 
-    log_validation(stage, blob_path, result, schema_errors, business_errors)
+    log_validation(stage, blob_path, result, schema_errors, business_errors, data)
 
     return result == "PASS"
 
@@ -178,7 +219,7 @@ def move_to_dead_letter(connection_string, container, blob_path, stage):
         blob_service_client = get_blob_service(connection_string)
 
         source_blob = blob_service_client.get_blob_client(container, blob_path)
-        dead_blob_path = f"{stage}/{blob_path.split('/')[-1]}"
+        dead_blob_path = f"{stage}/{datetime.now(timezone.utc).strftime('%Y%m%d%H%M%S')}_{blob_path.split('/')[-1]}"
 
         dead_blob = blob_service_client.get_blob_client(DEAD_LETTER_CONTAINER, dead_blob_path)
 

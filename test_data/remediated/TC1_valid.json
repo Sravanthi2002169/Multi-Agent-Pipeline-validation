@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "pipeline_run_id": "run-001",
+  "stage": "remediation",
+  "stage_status": "SUCCESS",
+  "remediated_files": [
+    {
+      "original_path": "file1.sql",
+      "remediated_path": "remediated/file1.sql",
+      "rollback_path": "rollback/file1.sql",
+      "changes_applied": ["fix applied"],
+      "change_id": "c1"
+    }
+  ],
+  "files_remediated": 1,
+  "files_skipped": 0,
+  "skip_reasons": []
+}

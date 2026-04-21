@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0",
+  "pipeline_run_id": "run-009",
+  "stage": "impact_analysis",
+  "stage_status": "PARTIAL",
+  "impact_results": [
+    {
+      "file_path": "file1.sql",
+      "change_id": "c1",
+      "severity": "LOW",
+      "reason": "Some parts could not be analyzed fully.",
+      "recommended_action": "REVIEW"
+    }
+  ],
+  "files_analyzed": 2,
+  "files_with_impact": 1
+}

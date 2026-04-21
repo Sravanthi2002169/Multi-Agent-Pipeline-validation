@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0",
+  "pipeline_run_id": "run-010",
+  "stage": "remediation",
+  "stage_status": "SUCCESS",
+  "remediated_files": [],
+  "files_remediated": 0,
+  "files_skipped": 0,
+  "skip_reasons": []
+}

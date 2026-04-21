@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "pipeline_run_id": "run-004",
+  "stage": "impact_analysis",
+  "stage_status": "SUCCESS",
+  "impact_results": [
+    {
+      "file_path": "file1.sql",
+      "change_id": "c1",
+      "reason": "Valid long reason explaining the impact clearly.",
+      "recommended_action": "REVIEW"
+    }
+  ],
+  "files_analyzed": 1,
+  "files_with_impact": 1
+}

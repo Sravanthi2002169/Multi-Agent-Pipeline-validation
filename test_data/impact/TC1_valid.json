@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "pipeline_run_id": "run-001",
+  "stage": "impact_analysis",
+  "stage_status": "SUCCESS",
+  "impact_results": [
+    {
+      "file_path": "file1.sql",
+      "change_id": "c1",
+      "severity": "HIGH",
+      "reason": "This change affects critical query execution logic.",
+      "affected_code_block": "SELECT * FROM table",
+      "recommended_action": "REMEDIATE"
+    }
+  ],
+  "files_analyzed": 1,
+  "files_with_impact": 1
+}
