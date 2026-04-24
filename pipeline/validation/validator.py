@@ -259,7 +259,7 @@ def validate_blob(schema_path, connection_string, container, blob_path, stage, r
 # -------------------------------
 def validate_with_retry(schema_path, connection_string, container, blob_path, stage, rules):
     for attempt in range(MAX_RETRIES + 1):
-        print(f"\n Attempt {attempt + 1} → {stage}")
+        print(f"\n Attempt {attempt + 1} -> {stage}")
 
         if validate_blob(schema_path, connection_string, container, blob_path, stage, rules):
             print(f" {stage} PASSED")
