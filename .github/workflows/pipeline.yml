@@ -1,0 +1,46 @@
+name: QNXT Pipeline Validation Gate
+
+on:
+ push:
+  branches:
+   - main
+ pull_request:
+  branches:
+   - main
+
+jobs:
+ validate-and-deploy:
+  runs-on: windows-latest
+  
+  steps:
+  - name: Checkout code
+    uses: actions/checkout@v4
+
+  - name: Set up Python
+    uses: actions/setup-python@v5
+    with:
+      python-version: '3.12'
+
+  - name: Install dependencies
+    run: |
+      pip install -r requirements.txt
+
+  - name: Set environment variable
+    run: |
+      echo "AZURE_STORAGE_CONNECTION_STRING=${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}" >> $env:GITHUB_ENV
+
+  - name: Run Pipeline
+    run: |
+      cd pipeline
+      python run_pipeline.py
+
+  - name: Fail if pipeline failed
+    if: failure()
+    run: |
+      echo "❌ Pipeline failed — deployment blocked"
+      exit 1
+
+  - name: Deploy (only if success)
+    if: success()
+    run: |
+      echo "🚀 Deployment allowed"

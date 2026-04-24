@@ -5,6 +5,7 @@
     "pipeline_run_id",
     "stage",
     "stage_status",
+    "timestamp",
     "impact_results",
     "files_analyzed",
     "files_with_impact"
@@ -12,29 +13,26 @@
   "properties": {
     "schema_version": {
       "type": "string",
-      "enum": [
-        "1.0"
-      ]
+      "enum": ["1.0"]
     },
     "pipeline_run_id": {
       "type": "string"
     },
     "stage": {
       "type": "string",
-      "enum": [
-        "impact_analysis"
-      ]
+      "enum": ["impact_analysis"]
     },
     "stage_status": {
       "type": "string",
-      "enum": [
-        "SUCCESS",
-        "PARTIAL",
-        "FAILURE"
-      ]
+      "enum": ["SUCCESS", "PARTIAL", "FAILURE"]
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
     },
     "impact_results": {
       "type": "array",
+      "minItems": 0,
       "items": {
         "type": "object",
         "required": [
@@ -53,11 +51,7 @@
           },
           "severity": {
             "type": "string",
-            "enum": [
-              "HIGH",
-              "MEDIUM",
-              "LOW"
-            ]
+            "enum": ["HIGH", "MEDIUM", "LOW"]
           },
           "reason": {
             "type": "string",
@@ -68,37 +62,34 @@
           },
           "recommended_action": {
             "type": "string",
-            "enum": [
-              "REMEDIATE",
-              "REVIEW",
-              "NO_ACTION"
-            ]
+            "enum": ["REMEDIATE", "REVIEW", "NO_ACTION"]
           }
         },
         "allOf": [
           {
             "if": {
               "properties": {
-                "severity": {
-                  "const": "HIGH"
-                }
+                "severity": { "const": "HIGH" }
               }
             },
             "then": {
-              "required": [
-                "affected_code_block"
-              ]
+              "required": ["affected_code_block"]
             }
           }
         ]
       }
     },
     "files_analyzed": {
-      "type": "integer"
+      "type": "integer",
+      "minimum": 0
     },
     "files_with_impact": {
       "type": "integer",
       "minimum": 0
+    },
+    "errors": {
+      "type": "array",
+      "items": { "type": "string" }
     }
   }
 }

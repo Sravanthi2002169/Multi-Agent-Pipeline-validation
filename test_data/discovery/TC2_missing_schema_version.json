@@ -1,5 +1,4 @@
 {
-  "schema_version": "1.0",
   "pipeline_run_id": "run-002",
   "release": "25.2.01",
   "stage": "discovery",

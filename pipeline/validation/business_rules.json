@@ -2,6 +2,20 @@
   "schema_version": "1.0",
   "rules": [
     {
+      "id": "DISC_001",
+      "stage": "discovery",
+      "type": "conditional",
+      "if": {
+        "field": "stage_status",
+        "equals": "SUCCESS"
+      },
+      "then": {
+        "field": "errors",
+        "must_be_empty": true
+      },
+      "description": "Errors must be empty when status is SUCCESS"
+    },
+    {
       "id": "BR-DISC-001",
       "stage": "discovery",
       "description": "total_files_impacted must be <= total_files_scanned",
@@ -24,6 +38,43 @@
         "field": "errors",
         "must_be_empty": true
       }
+    },
+    {
+      "id": "IMP_002",
+      "stage": "impact",
+      "type": "comparison",
+      "field": "",
+      "left": "files_analyzed",
+      "right": "files_with_impact",
+      "condition": "gte",
+      "description": "files_analyzed must be >= files_with_impact"
+    },
+    {
+      "id": "IMP_002",
+      "stage": "impact",
+      "type": "comparison",
+      "field": "",
+      "left": "files_analyzed",
+      "right": "files_with_impact",
+      "condition": "gte",
+      "description": "files_analyzed must be >= files_with_impact"
+    },
+    {
+      "id": "IMPACT_007",
+      "stage": "impact",
+      "type": "comparison",
+      "field": "summary",
+      "left": "files_with_impact",
+      "right": "files_analyzed",
+      "condition": "lte",
+      "description": "files_with_impact cannot exceed files_analyzed"
+    },
+    {
+      "id": "IMPACT_008",
+      "stage": "impact",
+      "type": "custom",
+      "description": "impacted files count must match actual list",
+      "logic": "len(impact_results) == summary.files_with_impact"
     },
     {
       "id": "BR-IMP-001",

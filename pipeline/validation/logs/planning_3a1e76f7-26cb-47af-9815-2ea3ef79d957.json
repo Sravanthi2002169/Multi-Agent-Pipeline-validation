@@ -1,0 +1,13 @@
+{
+  "log_type": "pipeline_validation",
+  "pipeline_run_id": "3a1e76f7-26cb-47af-9815-2ea3ef79d957",
+  "stage": "planning",
+  "timestamp": "2026-04-23T08:57:20.474917+00:00",
+  "blob_path": "agent_handoff/remediation_plan_plan-20260423T083409Z-2abab9e5.json",
+  "result": "FAIL",
+  "schema_errors": [
+    "'timestamp' is a required property"
+  ],
+  "business_errors": [],
+  "schema_version": "1.0"
+}

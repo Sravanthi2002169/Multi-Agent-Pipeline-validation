@@ -1,27 +1,8 @@
 {
   "schema_version": "1.0",
-  "pipeline_run_id": "run-008",
+  "pipeline_run_id": "run-123",
   "stage": "impact_analysis",
   "stage_status": "SUCCESS",
-  "impact_results": [],
-  "files_analyzed": 1,
+  "files_analyzed": 5,
   "files_with_impact": 0
-}
-{
-  "schema_version": "1.0",
-  "pipeline_run_id": "run-001",
-  "stage": "impact_analysis",
-  "stage_status": "SUCCESS",
-  "impact_results": [
-    {
-      "file_path": "file1.sql",
-      "change_id": "c1",
-      "severity": "HIGH",
-      "reason": "This change affects critical query execution logic.",
-      "affected_code_block": "SELECT * FROM table",
-      "recommended_action": "REMEDIATE"
-    }
-  ],
-  "files_analyzed": 1,
-  "files_with_impact": 1
 }

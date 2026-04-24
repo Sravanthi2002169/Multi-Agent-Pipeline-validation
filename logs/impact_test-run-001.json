@@ -2,14 +2,14 @@
   "log_type": "pipeline_validation",
   "pipeline_run_id": "test-run-001",
   "stage": "impact",
-  "timestamp": "2026-04-20T11:14:19.866253+00:00",
-  "input_blob_path": "agent_handoff/Impact_Report.json",
-  "output_blob_path": "agent_handoff/Impact_Report.json",
-  "validation_result": "FAIL",
+  "timestamp": "2026-04-22T08:43:04.610018+00:00",
+  "blob_path": "agent_handoff/Impact_Report.json",
+  "result": "FAIL",
   "schema_errors": [
     "'bad' is too short"
   ],
-  "business_rule_errors": [
+  "business_errors": [
+    "impacted files count must match actual list",
     "reason must be at least 20 characters"
   ],
   "schema_version": "1.0"

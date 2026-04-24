@@ -1,22 +1,22 @@
 {
   "schema_version": "1.0",
-  "pipeline_run_id": "run-001",
+  "pipeline_run_id": "run-123",
   "release": "25.2.01",
   "stage": "discovery",
   "stage_status": "FAILURE",
   "timestamp": "2026-04-20T10:00:00Z",
   "summary": {
-    "total_changes": 1,
-    "total_files_scanned": 1,
-    "total_files_impacted": 1
+    "total_changes": 5,
+    "total_files_scanned": 10,
+    "total_files_impacted": 3
   },
   "impacted_files": [
     {
-      "file_path": "file1.sql",
-      "change_ids": ["c1"],
-      "matched_patterns": ["pattern"],
-      "line_numbers": [10]
+      "file_path": "",
+      "change_ids": [],
+      "matched_patterns": [],
+      "line_numbers": []
     }
   ],
-  "errors": ["error occurred"]
+  "errors": []
 }

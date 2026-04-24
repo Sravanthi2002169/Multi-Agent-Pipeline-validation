@@ -1,0 +1,13 @@
+{
+  "log_type": "pipeline_validation",
+  "pipeline_run_id": "unknown",
+  "stage": "remediation",
+  "timestamp": "2026-04-23T09:00:34.817556+00:00",
+  "blob_path": "agent_handoff/apply_result_apply-20260423T075956Z-dafd6769.json",
+  "result": "FAIL",
+  "schema_errors": [
+    "'schema_version' is a required property"
+  ],
+  "business_errors": [],
+  "schema_version": "unknown"
+}

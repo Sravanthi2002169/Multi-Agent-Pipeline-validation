@@ -1,0 +1,11 @@
+{
+  "log_type": "pipeline_validation",
+  "pipeline_run_id": "cfe8c14a-de4b-4206-830e-0711e7bf99b6",
+  "stage": "remediation",
+  "timestamp": "2026-04-23T09:03:30.621151+00:00",
+  "blob_path": "agent_handoff/apply_result_apply-20260423T075956Z-dafd6769.json",
+  "result": "PASS",
+  "schema_errors": [],
+  "business_errors": [],
+  "schema_version": "1.0"
+}

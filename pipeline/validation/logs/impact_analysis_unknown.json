@@ -1,0 +1,13 @@
+{
+  "log_type": "pipeline_validation",
+  "pipeline_run_id": "unknown",
+  "stage": "impact_analysis",
+  "timestamp": "2026-04-23T08:53:18.389668+00:00",
+  "blob_path": "agent_handoff/remediation_plan_plan-20260423T083409Z-2abab9e5.json",
+  "result": "FAIL",
+  "schema_errors": [
+    "'schema_version' is a required property"
+  ],
+  "business_errors": [],
+  "schema_version": "unknown"
+}

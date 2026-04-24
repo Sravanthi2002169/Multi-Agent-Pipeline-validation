@@ -1,0 +1,13 @@
+{
+  "log_type": "pipeline_validation",
+  "pipeline_run_id": "unknown",
+  "stage": "discovery",
+  "timestamp": "2026-04-23T07:21:09.433745+00:00",
+  "blob_path": "agent_handoff/sp_discovery_result_scan-20260422T120832Z-ccd723d4.json",
+  "result": "FAIL",
+  "schema_errors": [
+    "'schema_version' is a required property"
+  ],
+  "business_errors": [],
+  "schema_version": "unknown"
+}

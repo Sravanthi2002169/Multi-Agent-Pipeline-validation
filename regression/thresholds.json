@@ -1,0 +1,13 @@
+{
+  "exact_match_fields": [
+    "stage",
+    "stage_status",
+    "schema_version"
+  ],
+  "numeric_tolerance": {
+    "files_analyzed": 0,
+    "files_with_impact": 0,
+    "files_remediated": 0
+  },
+  "text_similarity_threshold": 0.8
+}
