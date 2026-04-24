@@ -3,7 +3,7 @@
   "pipeline_run_id": "run-001",
   "release": "25.2.01",
   "stage": "discovery",
-  "stage_status": "SUCCESS",
+  "stage_status": "INVALID",
   "timestamp": "2026-04-20T10:00:00Z",
   "summary": {
     "total_changes": 1,
