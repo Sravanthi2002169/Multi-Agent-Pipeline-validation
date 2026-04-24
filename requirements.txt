@@ -1,0 +1,5 @@
+azure-storage-blob
+azure-core
+jsonschema
+certifi
+urllib3
