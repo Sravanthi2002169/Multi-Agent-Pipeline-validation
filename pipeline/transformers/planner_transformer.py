@@ -7,7 +7,7 @@ def transform_plan(raw):
         "pipeline_run_id": str(uuid.uuid4()),
         "stage": "impact_analysis",   # must match schema
         "stage_status": "SUCCESS",
-        "timestamp": datetime.now(timezone.utc).isoformat(),  # ✅ FIX ADDED
+        "timestamp": datetime.now(timezone.utc).isoformat(),
 
         "impact_results": [
             {

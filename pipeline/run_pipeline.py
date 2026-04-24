@@ -6,12 +6,12 @@ def run_pipeline():
     container = "tenant-qnxtupgd"
     rules = load_business_rules(os.path.join("validation", "business_rules.json"))
 
-    print("\n🚀 Starting Pipeline...\n")
+    print("\n Starting Pipeline...\n")
 
     # -------------------
     # DISCOVERY
     # -------------------
-    print("🔹 Running Discovery Agent...")
+    print(" Running Discovery Agent...")
     # TODO: call your discovery function here
 
     discovery_blob = get_stage_blob(conn, container, "discovery")
@@ -24,12 +24,12 @@ def run_pipeline():
         "discovery",
         rules
     ):
-        exit("🚫 Pipeline stopped at Discovery")
+        exit(" Pipeline stopped at Discovery")
 
     # -------------------
     # PLANNING
     # -------------------
-    print("\n🔹 Running Planner Agent...")
+    print("\n Running Planner Agent...")
     # TODO: call your planner function here
 
     plan_blob = get_stage_blob(conn, container, "planning")
@@ -42,12 +42,12 @@ def run_pipeline():
         "planning",
         rules
     ):
-        exit("🚫 Pipeline stopped at Planning")
+        exit(" Pipeline stopped at Planning")
 
     # -------------------
     # REMEDIATION
     # -------------------
-    print("\n🔹 Running Remediation Agent...")
+    print("\n Running Remediation Agent...")
     # TODO: call your remediation function here
 
     remediation_blob = get_stage_blob(conn, container, "remediation")
@@ -60,13 +60,13 @@ def run_pipeline():
         "remediation",
         rules
     ):
-        exit("🚫 Pipeline stopped at Remediation")
+        exit(" Pipeline stopped at Remediation")
 
-    print("\n🎉 PIPELINE COMPLETED SUCCESSFULLY")
+    print("\n PIPELINE COMPLETED SUCCESSFULLY")
 
 
 if __name__ == "__main__":
     run_pipeline()
     
-print("\n🎉 PIPELINE COMPLETED SUCCESSFULLY")
+print("\n PIPELINE COMPLETED SUCCESSFULLY")
 exit(0)

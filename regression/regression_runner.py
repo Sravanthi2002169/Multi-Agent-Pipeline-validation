@@ -44,7 +44,7 @@ def detect_drift(actual, expected, thresholds):
 # RUN TEST CASE
 # -------------------------------
 def run_test_case(stage, input_file, expected_file, schema_path, rules, thresholds):
-    print(f"\n🔍 {input_file}")
+    print(f"\n {input_file}")
 
     data = load_json(input_file)
     expected = load_json(expected_file)
@@ -60,12 +60,12 @@ def run_test_case(stage, input_file, expected_file, schema_path, rules, threshol
 
     drift = detect_drift(data, expected, thresholds)
 
-    status = "✅ PASS" if actual_result == expected_result else "❌ FAIL"
+    status = " PASS" if actual_result == expected_result else "❌ FAIL"
 
     print(f"Expected: {expected_result}, Actual: {actual_result} → {status}")
 
     if drift:
-        print(f"⚠️ Drift: {drift}")
+        print(f" Drift: {drift}")
 
     return {
         "test": input_file,
@@ -83,7 +83,7 @@ def run_stage(stage, schema_path, rules, thresholds):
     results = []
 
     if not os.path.exists(folder):
-        print(f"⚠️ Missing folder: {folder}")
+        print(f" Missing folder: {folder}")
         return results
 
     for file in os.listdir(folder):
@@ -94,7 +94,7 @@ def run_stage(stage, schema_path, rules, thresholds):
             expected_file = os.path.join(folder, f"{name}_expected.json")
 
             if not os.path.exists(expected_file):
-                print(f"⚠️ Missing expected: {file}")
+                print(f"Missing expected: {file}")
                 continue
 
             results.append(

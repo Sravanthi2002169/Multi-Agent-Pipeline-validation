@@ -28,7 +28,7 @@ valid_data = {
 # Validate
 try:
     validate(instance=valid_data, schema=schema)
-    print("✅ VALID DATA")
+    print(" VALID DATA")
 except ValidationError as e:
-    print("❌ INVALID DATA")
+    print(" INVALID DATA")
     print(e)

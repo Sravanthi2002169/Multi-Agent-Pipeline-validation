@@ -77,7 +77,7 @@ def load_json_from_blob(connection_string, container, blob_path):
             return content
 
     except Exception as e:
-        print(f"⚠️ Blob read failed [{blob_path}]: {e}")
+        print(f" Blob read failed [{blob_path}]: {e}")
         return None
 
 # -------------------------------
@@ -171,7 +171,7 @@ def log_validation(stage, blob_path, result, schema_errors, business_errors, dat
             "schema_version": data.get("schema_version", "unknown")
         }
 
-        print("\n📊 VALIDATION LOG")
+        print("\n VALIDATION LOG")
         print(json.dumps(log, indent=2))
 
         # Save locally
@@ -183,7 +183,7 @@ def log_validation(stage, blob_path, result, schema_errors, business_errors, dat
         upload_log(log, stage, run_id)
 
     except Exception as e:
-        print(f"⚠️ Logging failed: {e}")
+        print(f" Logging failed: {e}")
 
 def upload_log(log, stage, run_id):
     try:
@@ -196,10 +196,10 @@ def upload_log(log, stage, run_id):
             overwrite=True
         )
 
-        print(f"☁️ Uploaded log → {blob_name}")
+        print(f" Uploaded log → {blob_name}")
 
     except Exception as e:
-        print(f"⚠️ Blob log upload failed: {e}")
+        print(f" Blob log upload failed: {e}")
 
 # -------------------------------
 # DEAD LETTER
@@ -214,10 +214,10 @@ def move_to_dead_letter(connection_string, container, blob_path, stage):
         data = src.download_blob().readall()
         client.get_blob_client(DEAD_LETTER_CONTAINER, dest_path).upload_blob(data, overwrite=True)
 
-        print(f"📦 Dead-lettered → {dest_path}")
+        print(f" Dead-lettered → {dest_path}")
 
     except Exception as e:
-        print(f"⚠️ Dead-letter failed: {e}")
+        print(f" Dead-letter failed: {e}")
 
 # -------------------------------
 # CORE VALIDATION
@@ -242,7 +242,7 @@ def validate_blob(schema_path, connection_string, container, blob_path, stage, r
         data = raw
 
     if not isinstance(data, dict):  # SAFETY FIX
-        print("⚠️ Invalid data format (not JSON object)")
+        print(" Invalid data format (not JSON object)")
         return False
 
     schema_errors = validate_schema(data, schema)
@@ -259,14 +259,14 @@ def validate_blob(schema_path, connection_string, container, blob_path, stage, r
 # -------------------------------
 def validate_with_retry(schema_path, connection_string, container, blob_path, stage, rules):
     for attempt in range(MAX_RETRIES + 1):
-        print(f"\n🔁 Attempt {attempt + 1} → {stage}")
+        print(f"\n Attempt {attempt + 1} → {stage}")
 
         if validate_blob(schema_path, connection_string, container, blob_path, stage, rules):
-            print(f"✅ {stage} PASSED")
+            print(f" {stage} PASSED")
             return True
 
         if attempt == MAX_RETRIES:
-            print("❌ Max retries reached")
+            print(" Max retries reached")
             move_to_dead_letter(connection_string, container, blob_path, stage)
             return False
 
@@ -286,7 +286,7 @@ if __name__ == "__main__":
     discovery_blob = get_stage_blob(conn, container, "discovery")
 
     if not discovery_blob:
-        exit("❌ No discovery output found")
+        exit(" No discovery output found")
 
     if not validate_with_retry(
         STAGE_SCHEMA_MAP["discovery"],
@@ -296,7 +296,7 @@ if __name__ == "__main__":
         "discovery",
         rules
     ):
-        exit("🚫 Stopped at Discovery")
+        exit(" Stopped at Discovery")
         
         
 
@@ -306,7 +306,7 @@ if __name__ == "__main__":
     impact_blob = get_stage_blob(conn, container, "planning")
 
     if not impact_blob:
-        exit("❌ No impact output found")
+        exit(" No impact output found")
 
     if not validate_with_retry(
         STAGE_SCHEMA_MAP["planning"],
@@ -316,7 +316,7 @@ if __name__ == "__main__":
         "planning",
         rules
     ):
-        exit("🚫 Stopped at Planning")
+        exit(" Stopped at Planning")
 
     # -------------------------
     # REMEDIATION
@@ -324,7 +324,7 @@ if __name__ == "__main__":
     remediation_blob = get_stage_blob(conn, container, "remediation")
 
     if not remediation_blob:
-        exit("❌ No remediation output found")
+        exit(" No remediation output found")
 
     if not validate_with_retry(
         STAGE_SCHEMA_MAP["remediation"],
@@ -334,6 +334,6 @@ if __name__ == "__main__":
         "remediation",
         rules
     ):
-        exit("🚫 Stopped at Remediation")
+        exit(" Stopped at Remediation")
 
-    print("\n✅ FULL PIPELINE VALIDATION PASSED")
+    print("\n FULL PIPELINE VALIDATION PASSED")
