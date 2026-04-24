@@ -115,11 +115,19 @@ def validate_business_rules(data, stage, rules):
 
         try:
             if rule["type"] == "comparison":
-                section = data.get(rule["field"], {}) if rule.get("field") else data
-                left = section.get(rule["left"], 0)
-                right = section.get(rule["right"], 0)
+                section = data.get(rule.get("field"), {}) if rule.get("field") else data
+                left = section.get(rule.get("left"), 0)
+                right = section.get(rule.get("right"), 0)
 
-            if rule["condition"] == "lte" and left > right:
+                condition = rule.get("condition")
+
+                if condition == "lte" and left > right:
+                    errors.append(rule["description"])
+
+                elif condition == "gte" and left < right:
+                    errors.append(rule["description"])
+
+                elif condition == "eq" and left != right:
                     errors.append(rule["description"])
 
             elif rule["type"] == "array_length":

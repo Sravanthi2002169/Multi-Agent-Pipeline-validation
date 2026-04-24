@@ -1,7 +1,7 @@
 import os
 import json
 from difflib import SequenceMatcher
-from validators.validator import validate_schema, validate_business_rules, load_json
+from pipeline.validation.validator import validate_schema, validate_business_rules, load_json
 
 BASE_PATH = "test_data"
 
@@ -119,7 +119,7 @@ def summary(results):
 # MAIN
 # -------------------------------
 if __name__ == "__main__":
-    rules = load_json("business_rules.json")["rules"]
+    rules = load_json("pipeline/validation/business_rules.json")["rules"]
     thresholds = load_thresholds()
 
     discovery = run_stage("discovery", "schemas/discovery_schema.json", rules, thresholds)
