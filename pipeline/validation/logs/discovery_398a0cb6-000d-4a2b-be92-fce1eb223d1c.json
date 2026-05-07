@@ -1,0 +1,11 @@
+{
+  "log_type": "pipeline_validation",
+  "pipeline_run_id": "398a0cb6-000d-4a2b-be92-fce1eb223d1c",
+  "stage": "discovery",
+  "timestamp": "2026-05-05T15:08:41.645107+00:00",
+  "blob_path": "agent_handoff/sp_discovery_result_scan-20260504T081003Z-8055c2f9.json",
+  "result": "PASS",
+  "schema_errors": [],
+  "business_errors": [],
+  "schema_version": "1.0"
+}

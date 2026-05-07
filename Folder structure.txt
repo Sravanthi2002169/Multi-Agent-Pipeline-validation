@@ -1,0 +1,20 @@
+pipeline/
+  discovery/
+  planning/
+  remediation/
+  transformers/
+  validation/
+    validator.py
+    business_rules.json
+
+regression/
+  regression_runner.py
+  thresholds.json
+
+test_data/
+  discovery/
+  impact/
+  remediation/
+
+.github/workflows/
+  pipeline.yml
